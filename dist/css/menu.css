@@ -1,0 +1,128 @@
+/*meun样式*/
+a{
+	text-decoration:none;
+}
+
+#sidebar{
+	width: 70px;
+	height:100%;
+	position:fixed;
+	float: left;
+	display:block;
+	background-color: rgba(35,35,35,1.00);
+	box-shadow: 2px 3px 5px #000000;
+	z-index: 2;
+}
+.logo1{
+	position: relative;
+	float: left;
+	width: 60px;
+	height: 60px;
+	border: 1px solid rgba(65,65,65,1.00);
+	border-radius: 30px;
+	background-image: url(../image/logo.png);
+	margin:10px 4px;
+	background-color: rgba(0,0,0,1.00);
+	
+}
+.logo1:hover{
+	background-color: rgba(250,250,250,1.0);
+}
+.logo1:hover span{
+	display: block;
+}
+.logo1 span{
+	display: none;
+	position: fixed;
+	float: left;
+	margin: 0px 65px;
+	box-shadow: 2px 3px 3px #000000;
+	padding: 5px 12px;
+	border-radius: 4px;
+	border: 1px solid rgba(95,95,95,1.00);
+	background-color: rgba(55,55,55,0.90);
+}
+.logo-bg{
+	background-color: rgba(35,35,35,1.00); 
+	width: 70px; height: 80px;
+}
+.menu{
+	background-color: rgba(35,35,35,1.00);
+}
+ul.sidebar-menu{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+ul.sidebar-menu>li{
+	display: block;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+ul.sidebar-menu>li>a{
+	font-size: 34px;
+	line-height: 65px;
+	color: rgba(142,142,142,1.80);
+	margin-left: 20px;
+	display: block;
+}
+ul.sidebar-menu>li.active>a,ul.sidebar-menu>li>a:hover{
+	color: aqua;
+}
+ul.sidebar-menu>li:hover{
+	background-color: rgba(21,21,21,1.00);
+	cursor: pointer;
+	color: aqua;
+	
+}
+ul.sidebar-menu>li.active{
+	background-color: rgba(21,21,21,1.00);
+}
+/*---------------*/
+
+/*
+ul.sidebar-menu>li>ul.sub-menu{
+	display:none;}
+
+
+ul.sidebar-menu>li:hover .sub-menu{
+	display: block;
+}
+ul.sidebar-menu>li>ul.sub-menu{
+	display:none;
+	list-style: none !important;
+	clear: both;
+	width: 200px;
+	position: fixed;
+	margin: 0px;
+	margin-left: 70px;
+	margin-top: -67px;
+	box-shadow: 2px 3px 5px #000000;
+	
+	padding-left: 0px !important;
+}
+
+ul.sidebar-menu>li>ul.sub-menu>li{
+	font-size: 14px !important; 
+	background-color: rgba(21,21,21,0.80);
+	display:block;
+	margin: 0px;
+	padding:5px 10px 10px 20px;
+	line-height: 20px;
+	
+}
+
+ul.sidebar-menu>li>ul.sub-menu>li>a.active{
+	color: aqua;
+}
+ul.sidebar-menu>li>ul.sub-menu>li:hover{
+	background-color: rgba(61,61,61,0.80);
+}
+ul.sidebar-menu>li>ul.sub-menu>li>a{
+	color: rgba(190,192,194,1.00);
+}
+ul.sidebar-menu>li>ul.sub-menu>li>a:hover{
+	color: rgba(103,239,245,1.00);
+}
+*/

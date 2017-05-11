@@ -1,0 +1,139 @@
+@charset "utf-8";
+html,body{
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-family: "微软雅黑";
+}
+body{
+	background: rgba(23,23,23,1.00);
+	font-family:Gotham, Helvetica Neue, Helvetica, Arial,'sans-serif', "Microsoft YaHei","iconfont";
+	color: rgba(214,213,217,1.00);
+	 
+}
+a{
+	color: rgba(76,193,195,1.00);
+	text-decoration: none;
+	
+}
+a:hover{
+	color: rgba(23,23,23,1.00);
+}
+.cotent{
+	margin-left: 20px;
+	float: left;
+	height: 100%;
+	width: 80%;	
+}
+@media screen and (min-width: 1441px) {
+.cotent {width: 80%;}
+}
+/* css注释：设置了浏览器宽度不小于1441px时 cotent 显示80%宽度 */
+
+@media screen and (max-width: 1440px) {
+.cotent {width: 70%}
+}
+/* 设置了浏览器宽度不大于1440px时 cotent 显示70%宽度 */ 
+@media screen and (max-width: 960px) {
+.cotent {width: 40%}
+}
+/* 设置了浏览器宽度不大于960px时 cotent 显示40%宽度 */ 
+h3 {
+	box-shadow: 2px 3px 3px #000000;
+	font-weight: normal;
+	font-size: 14px;
+	font-family:Gotham, Helvetica Neue, Helvetica, Arial,' sans-serif','微软雅黑';
+	width: auto;
+	display: inline;
+	border: 1px solid rgba(95,95,95,1.00);
+	border-radius: 20px;
+	padding: 5px 15px;
+	margin-top: 20px;
+	color:#E0E0E0;
+}
+
+.div1 {
+	margin: 20px;
+	padding: 10px;
+	display:inline-block;
+	border: 1px solid rgba(100,100,100,1.00);
+	color: antiquewhite;
+}
+.div1:hover{
+	background-color:#0B0B0B;color: aqua;
+	cursor: pointer;
+}
+/*表格样式*/
+.cn-tab {
+	padding:20px;
+	width:100%;
+	box-sizing:border-box;
+	text-align:left;
+	margin-top:50px;
+	
+}
+.table {
+	width:100%;
+	font-size: 14px;
+	color:#8b8e96;
+}
+.cn-tab th{
+	text-align: center;
+}
+.cn-tab tr th {
+	padding:5px 10px;
+	line-height:30px;
+	border-bottom:1px solid #daab0f;
+	color:#c4b06a;
+}
+.cn-tab tr td {
+	padding:12px 20px;
+/* 	border-bottom:1px solid #33353a; */
+	cursor: pointer;
+}
+.tb-hover {
+	background:#101112;
+}
+.table tr:hover{
+	background: rgba(33,33,33,1.00);
+	color: rgba(203,202,204,1.00);
+}
+
+.page {
+	width:360px;
+	margin:10px auto 30px auto;
+	padding:15px 20px;
+}
+.page ul li {
+	float:left;
+	margin:0 10px;
+	font-size:12px;
+	color:#8b8e96;	
+	height:22px;
+	line-height:22px;
+	list-style: none;
+}
+.page-active {
+	background:#070708;
+	height:22px;
+	width:22px;
+	text-align: center;
+	border-radius:50%;
+	font-weight:bold;
+}
+.n-page  {
+	text-align:left;
+	line-height:26px;
+	padding:10px 0;
+}
+.page ul li a {
+	color:#8b8e96;
+}
+.page ul li a:hover {
+	color:#ffc853;
+	font-weight:bold;
+}
+
+.tite {
+	margin: 20px;
+}

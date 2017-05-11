@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />   
+       <style type="text/css">
+body, html,#container {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";
+ /*filter: blur(3px);*/     
+} 
+
+<!--去掉百度logo-->
+.BMap_cpyCtrl  
+        {  
+            display:none;   
+        }  
+        .anchorBL{  
+            display:none;   
+        } 
+</style>
+	<link rel="stylesheet" type="text/css" href="css/mainStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/css.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.orgchart.css">
+	<link rel="stylesheet" type="text/css" href="css/tou.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+   	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.css" />
+   	
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/Chart.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
+    <script src="js/classie.js"></script>
+    <script type="text/javascript" src="js/jquery.orgchart.js"></script>
+    
+ 	<script type="text/javascript">
+
+$(function(){	
+	//导航菜单状态切换
+	$("#jquery-accordion-menu ul li").click(function(){
+		$("#jquery-accordion-menu ul li.active").removeClass("active")
+		$(this).addClass("active");
+	});	
+	$("#menu li").click(function(){
+		$("#menu li.active").removeClass("active")
+		$(this).addClass("active");
+	})	
+})	
+</script>
+</head>
+<body style="height: 100%; margin:0">
+   		
+
+
+<!--菜单开始--> <!--侧导航-->
+<!--菜单-->
+<div id="sidebar" >
+
+<div class="logo1"><span class="tite">热力公司</span></div>
+<div  class="logo-bg"></div>
+
+<div class="menu" id="menu">
+	<ul class="sidebar-menu">
+		<li class="active" ><a href="index.html"><i class="nav-ico iconfont icon-shouye-copy"></i></a></li>
+		<li ><a ><i class="nav-ico iconfont icon-qiye1"></i></a></li>
+		<li id="list1" onclick="setMenu('list',1)"><a href="Form.html"><i class="nav-ico iconfont icon-anquan"></i></a></li>
+		<li id="list2" onclick="setMenu('list',2)"><a href="Button-input.html"><i class="nav-ico iconfont icon-shengchan"></i></a></li>
+		<li><a><i class="nav-ico iconfont icon-huanbao"></i></a></li>
+		<li><a><i class="nav-ico iconfont icon-yonghuguanli"></i></a></li>
+		<li><a><i class="nav-ico iconfont icon-shebeiguanli"></i></a></li>
+		<li><a><i class="nav-ico iconfont icon-nengyuan"></i></a></li>
+		<li><a><i class="nav-ico iconfont icon-basedata"></i></a></li>
+		
+	</ul>
+</div>	
+</div>
+<!--菜单结束-->
+
+ <!--温度显示-->       
+        <div style=" opacity:0.8; width:140px; height:47px; right:50px;  top:5px; position:fixed; border-style:#fff 1px dotted; z-index:2;"><span style="opacity:0.7; color:#fffee6; font-family:Verdana; font-size:22px;">23 &#8451; </span> <img src="tq.png"/>
+      
+        </div>
+ <!--温度显示结束-->
+ 
+ 
+ 
+ 
+ <!--地图内容页-->         
+       <div id="container" ></div>
+ <!--地图内容页结束--> 
+ 
+    <script type="text/javascript" src="js/echarts-all-3.js"></script>
+    <script type="text/javascript" src="js/dataTool.min.js"></script>
+       
+	<script type="text/javascript" src="js/bmap.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=byIYTCIgUESOOHhaB8FCVHGbM4kmgh60"></script>
+       
+<script type="text/javascript">
+	
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+
+var app = {};
+option = null;
+app.title = '热力管网';
+
+var data1 = [
+    
+     {name: '城北', value: 70},
+     {name: '渭水', value: 43},
+     {name: '太华', value: 44},
+     {name: '城区', value: 72},
+     {name: '雁东', value: 92},
+	 {name: '北联', value: 72},
+     {name: '泾渭', value: 32},
+	 {name: '草堂', value: 52},
+	 {name: '高陵', value: 32},
+	 {name: '阎良', value: 42},
+];
+var geoCoordMap = {
+	'城北':[108.96,34.32],
+    '渭水':[108.91,34.38],
+    '太华':[109.01,34.30],
+    '城区':[108.953650,34.26564],
+    '雁东':[109.02,34.23],
+	'北联':[109.01,34.39],
+	'泾渭':[109.03,34.48],
+	'草堂':[108.70,34.03],
+	'高陵':[109.09,34.55],
+	'阎良':[109.19,34.65]
+};
+
+var convertData = function (data) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name];
+        if (geoCoord) {
+            res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value)
+            });
+        }
+    }
+    return res;
+};
+	
+$.getJSON('lines-tube.json', function(data) {
+    var hStep = 300 / (data.length - 1);
+    var pipeLines = [].concat.apply([], data.map(function (pipeLine, idx) {
+        var prevPt;
+        var points = [];
+        for (var i = 0; i < pipeLine.length; i += 2) {
+            var pt = [pipeLine[i], pipeLine[i + 1]];
+            if (i > 0) {
+                pt = [
+                    prevPt[0] + pt[0],
+                    prevPt[1] + pt[1]
+                ];
+            }
+            prevPt = pt;
+
+            points.push([pt[0] / 1e4, pt[1] / 1e4]);
+        }
+        return {
+            coords: points,
+            lineStyle: {
+                normal: {
+                    color: echarts.color.modifyHSL('#5A94DF', Math.round(hStep * idx))
+                }
+            }
+        };
+    }));
+	
+
+   
+    myChart.setOption(
+	
+	option = {
+        bmap: {
+			center: [109.0404, 34.3252],
+            zoom: 11,
+            roam: true,
+            mapStyle: {
+              'styleJson': [
+                {
+                  'featureType': 'water',
+                  'elementType': 'all',
+                  'stylers': {
+                    'color': '#031628'
+                  }
+                },
+                {
+                  'featureType': 'land',
+                  'elementType': 'geometry',
+                  'stylers': {
+                    'color': '#000104'
+                  }
+                },
+                {
+                  'featureType': 'highway',
+                  'elementType': 'all',
+                  'stylers': {
+                    'visibility': 'off'
+                  }
+                },
+                {
+                  'featureType': 'arterial',
+                  'elementType': 'geometry.fill',
+                  'stylers': {
+                    'color': '#000000'
+                  }
+                },
+                {
+                  'featureType': 'arterial',
+                  'elementType': 'geometry.stroke',
+                  'stylers': {
+                    'color': '#0b3d51'
+                  }
+                },
+                {
+                  'featureType': 'local',
+                  'elementType': 'geometry',
+                  'stylers': {
+                    'color': '#000000'
+                  }
+                },
+                {
+                  'featureType': 'railway',
+                  'elementType': 'geometry.fill',
+                  'stylers': {
+                    'color': '#000000'
+                  }
+                },
+                {
+                  'featureType': 'railway',
+                  'elementType': 'geometry.stroke',
+                  'stylers': {
+                    'color': '#08304b'
+                  }
+                },
+                {
+                  'featureType': 'subway',
+                  'elementType': 'all',
+                  'stylers': {
+                    'lightness': -70,
+					'visibility': 'off'
+                  }
+                },
+                {
+                  'featureType': 'building',
+                  'elementType': 'geometry.fill',
+                  'stylers': {
+                    'color': '#000000'
+                  }
+                },
+                {
+                  'featureType': 'all',
+                  'elementType': 'labels.text.fill',
+                  'stylers': {
+                    'color': '#857f7f'
+                  }
+                },
+                {
+                  'featureType': 'all',
+                  'elementType': 'labels.text.stroke',
+                  'stylers': {
+                    'color': '#000000'
+                  }
+                },
+                {
+                  'featureType': 'building',
+                  'elementType': 'geometry',
+                  'stylers': {
+                    'color': '#022338'
+                  }
+                },
+                {
+                  'featureType': 'green',
+                  'elementType': 'geometry',
+                  'stylers': {
+                    'color': '#062032'
+                  }
+                },
+                {
+                  'featureType': 'boundary',
+                  'elementType': 'all',
+                  'stylers': {
+                    'color': '#465b6c'
+                  }
+                },
+                {
+                  'featureType': 'manmade',
+                  'elementType': 'all',
+                  'stylers': {
+                    'color': '#022338'
+                  }
+                },
+				 {
+                  'featureType': 'Poi',
+                  'elementType': 'all',
+                  'stylers': {
+                    'visibility': 'off'
+                  }
+                },
+                {
+                  'featureType': 'label',
+                  'elementType': 'all',
+                  'stylers': {
+                    'visibility': 'off'
+                  }
+                }
+              ]
+            }
+        },
+        series: [{
+            type: 'lines',
+            coordinateSystem: 'bmap',
+            polyline: true,
+            data: pipeLines,
+            silent: true,
+            lineStyle: {
+                normal: {
+                    // color: '#c23531',
+                    // color: 'rgb(200, 35, 45)',
+                    opacity: 0.3,
+                    width: 2
+                }
+            },
+            progressiveThreshold: 500,
+            progressive: 200
+        }, {
+            type: 'lines',
+            coordinateSystem: 'bmap',
+            polyline: true,
+            data: pipeLines,
+            lineStyle: {
+                normal: {
+                    width: 0
+                }
+            },
+            effect: {
+                constantSpeed: 20,
+                show: true,
+                trailLength: 0.1,
+                symbolSize: 3
+            },
+			zlevel: 1
+		},
+        {
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+            data: convertData(data1),
+            symbolSize: function (val) {
+                return val[2] / 5;
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#6bd3d3',
+					opacity: 0.3,
+                }
+            }
+        },
+        {
+            name: 'Top 6',
+            type: 'effectScatter',
+            coordinateSystem: 'bmap',
+            data: convertData(data1.sort(function (a, b) {
+                return b.value - a.value;
+            }).slice(0, 10)),
+            symbolSize: function (val) {
+                return val[2] / 5;
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#6bb2d3',
+					opacity: 0.5,
+                    shadowBlur: 20,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 2
+        
+
+		}
+		]
+    });
+	
+	
+	
+});
+
+
+	
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+
+
+
+       </script>
+   </body>
+</html>
