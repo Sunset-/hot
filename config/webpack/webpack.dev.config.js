@@ -9,7 +9,7 @@ const Alias = require('./alias');
 
 
 var entry = {   
-    index: ['webpack/hot/only-dev-server', './src/app.js']
+    index: ['webpack/hot/only-dev-server', './src/main.js']
 };
 
 var output = {
