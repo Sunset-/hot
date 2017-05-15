@@ -9,12 +9,13 @@ const Alias = require('./alias');
 
 
 var entry = {   
-    index: ['webpack/hot/only-dev-server', './src/main.js']
+    product: ['webpack/hot/only-dev-server', './src/product.js'],
+    bundle: ['webpack/hot/only-dev-server', './src/main.js']
 };
 
 var output = {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
 };
 
 var config = {
@@ -22,7 +23,7 @@ var config = {
     output: output,
     module: {
         noParse: [],
-        loaders: [ {
+        loaders: [{
             test: /\.js$/,
             exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
             loader: 'babel-loader'

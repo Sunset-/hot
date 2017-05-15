@@ -16,133 +16,115 @@
     //地图风格
     const MAP_THEME = {
         'styleJson': [{
-                'featureType': 'water',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#031628'
-                }
-            },
-            {
-                'featureType': 'land',
-                'elementType': 'geometry',
-                'stylers': {
-                    'color': '#000104'
-                }
-            },
-            {
-                'featureType': 'highway',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            },
-            {
-                'featureType': 'arterial',
-                'elementType': 'geometry.fill',
-                'stylers': {
-                    'color': '#000000'
-                }
-            },
-            {
-                'featureType': 'arterial',
-                'elementType': 'geometry.stroke',
-                'stylers': {
-                    'color': '#0b3d51'
-                }
-            },
-            {
-                'featureType': 'local',
-                'elementType': 'geometry',
-                'stylers': {
-                    'color': '#000000'
-                }
-            },
-            {
-                'featureType': 'railway',
-                'elementType': 'geometry.fill',
-                'stylers': {
-                    'color': '#000000'
-                }
-            },
-            {
-                'featureType': 'railway',
-                'elementType': 'geometry.stroke',
-                'stylers': {
-                    'color': '#08304b'
-                }
-            },
-            {
-                'featureType': 'subway',
-                'elementType': 'all',
-                'stylers': {
-                    'lightness': -70,
-                    'visibility': 'off'
-                }
-            },
-            {
-                'featureType': 'building',
-                'elementType': 'geometry.fill',
-                'stylers': {
-                    'color': '#000000'
-                }
-            },
-            {
-                'featureType': 'all',
-                'elementType': 'labels.text.fill',
-                'stylers': {
-                    'color': '#857f7f'
-                }
-            },
-            {
-                'featureType': 'all',
-                'elementType': 'labels.text.stroke',
-                'stylers': {
-                    'color': '#000000'
-                }
-            },
-            {
-                'featureType': 'building',
-                'elementType': 'geometry',
-                'stylers': {
-                    'color': '#022338'
-                }
-            },
-            {
-                'featureType': 'green',
-                'elementType': 'geometry',
-                'stylers': {
-                    'color': '#062032'
-                }
-            },
-            {
-                'featureType': 'boundary',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#465b6c'
-                }
-            },
-            {
-                'featureType': 'manmade',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#022338'
-                }
-            },
-            {
-                'featureType': 'Poi',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            },
-            {
-                'featureType': 'label',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
+            'featureType': 'water',
+            'elementType': 'all',
+            'stylers': {
+                'color': '#031628'
             }
-        ]
+        }, {
+            'featureType': 'land',
+            'elementType': 'geometry',
+            'stylers': {
+                'color': '#000104'
+            }
+        }, {
+            'featureType': 'highway',
+            'elementType': 'all',
+            'stylers': {
+                'visibility': 'off'
+            }
+        }, {
+            'featureType': 'arterial',
+            'elementType': 'geometry.fill',
+            'stylers': {
+                'color': '#000000'
+            }
+        }, {
+            'featureType': 'arterial',
+            'elementType': 'geometry.stroke',
+            'stylers': {
+                'color': '#0b3d51'
+            }
+        }, {
+            'featureType': 'local',
+            'elementType': 'geometry',
+            'stylers': {
+                'color': '#000000'
+            }
+        }, {
+            'featureType': 'railway',
+            'elementType': 'geometry.fill',
+            'stylers': {
+                'color': '#000000'
+            }
+        }, {
+            'featureType': 'railway',
+            'elementType': 'geometry.stroke',
+            'stylers': {
+                'color': '#08304b'
+            }
+        }, {
+            'featureType': 'subway',
+            'elementType': 'all',
+            'stylers': {
+                'lightness': -70,
+                'visibility': 'off'
+            }
+        }, {
+            'featureType': 'building',
+            'elementType': 'geometry.fill',
+            'stylers': {
+                'color': '#000000'
+            }
+        }, {
+            'featureType': 'all',
+            'elementType': 'labels.text.fill',
+            'stylers': {
+                'color': '#857f7f'
+            }
+        }, {
+            'featureType': 'all',
+            'elementType': 'labels.text.stroke',
+            'stylers': {
+                'color': '#000000'
+            }
+        }, {
+            'featureType': 'building',
+            'elementType': 'geometry',
+            'stylers': {
+                'color': '#022338'
+            }
+        }, {
+            'featureType': 'green',
+            'elementType': 'geometry',
+            'stylers': {
+                'color': '#062032'
+            }
+        }, {
+            'featureType': 'boundary',
+            'elementType': 'all',
+            'stylers': {
+                'color': '#465b6c'
+            }
+        }, {
+            'featureType': 'manmade',
+            'elementType': 'all',
+            'stylers': {
+                'color': '#022338'
+            }
+        }, {
+            'featureType': 'Poi',
+            'elementType': 'all',
+            'stylers': {
+                'visibility': 'off'
+            }
+        }, {
+            'featureType': 'label',
+            'elementType': 'all',
+            'stylers': {
+                'visibility': 'off'
+            }
+        }]
     };
 
     const DEFAULT_LINE_STYLE = {
@@ -174,6 +156,7 @@
         },
         init(options = {}) {
             this._checkDepLibs();
+            this.state.edit = !!options.edit;
             options.container && this._initEchartsMap(options);
             return {
                 then: (func) => {
@@ -199,6 +182,23 @@
          * 初始化地图应用
          */
         _initEchartsMap(options) {
+            var map = new BMap.Map($(options.container)[0], {
+                enableMapClick: false
+            });
+            map.centerAndZoom(new BMap.Point(options.center[0], options.center[1]), options.zoom);
+            map.enableScrollWheelZoom();
+            this.bmap = map;
+            this._initMapEvents();
+            while (this.thens.length) {
+                this.thens.shift().call(this);
+            }
+            this.inited = true;
+            map.setMapStyle({
+                style: 'dark'
+            });
+            return;
+
+
             var $container = $(options.container);
             if (!$container.length) {
                 warn(`请传入container元素节点`);
@@ -241,7 +241,7 @@
             this.bmap.addEventListener('click', (e) => {
                 region.push(`${e.point.lng},${e.point.lat}`);
                 console.log(region.join(';'))
-                window.MAP_CONFIG_DATA && window.MAP_CONFIG_DATA(e);
+                window.globalAddNodeOrPipe && window.globalAddNodeOrPipe(e);
             });
         },
         /**
@@ -263,7 +263,7 @@
         },
         getNodeByPoint(point) {
             if (!this.state.point_node[point]) {
-                debugger;
+                // debugger;
             }
             return this.state.point_node[point];
         },
@@ -290,6 +290,9 @@
                         node = nodes.pop();
                         delete point_node[`${node._point.lng},${node._point.lat}`];
                         bmap.removeOverlay(node._marker);
+                        node._region && bmap.removeOverlay(node._region);
+                        node._marker = null;
+                        node._region = null;
                     }
                 }
             }
@@ -324,11 +327,36 @@
             }
 
             //编辑相关
-            node._marker.enableDragging();
-            node._marker.addEventListener('dragend', function (e) {
-                node._point = e.point;
-                node.coord = [e.point.lng, e.point.lat];
-            });
+            if (this.state.edit) {
+                node._marker._type = node.type;
+                node._marker.enableDragging();
+                node._region && node._region.enableEditing();
+                node._marker.addEventListener('click', function (e) {
+                    window.globalOperateNodeAndPipe && window.globalOperateNodeAndPipe(e, e.target);
+                });
+                node._marker.addEventListener('dragend', (e) => {
+                    var oldPoint = node._point,
+                        newPoint = e.point;
+                    //替换node坐标
+                    node._point = e.point;
+                    node.coord = [e.point.lng, e.point.lat];
+                    //变更pipe坐标
+                    var pipeMap = this.state.pipes;
+                    Object.keys(pipeMap).forEach(type => {
+                        var pipes = pipeMap[type];
+                        pipes.forEach(pipe => {
+                            var points = pipe._line.getPath();
+                            if (points[0].equals(oldPoint)) {
+                                points[0] = newPoint;
+                            }
+                            if (points[points.length - 1].equals(oldPoint)) {
+                                points[points.length - 1] = newPoint;
+                            }
+                            pipe._line.setPath(points);
+                        })
+                    })
+                });
+            }
         },
         _changeNodeIcon(node) {
             var iconCallback = config.nodeIcons && config.nodeIcons[node.type];
@@ -386,6 +414,7 @@
                 }
             });
             this.refresh(null, pipes);
+            return pipes;
         },
         /**
          * 清除节点
@@ -404,7 +433,9 @@
                 var pipes = this.state.pipes[clearType];
                 if (pipes) {
                     while (pipes.length) {
-                        bmap.removeOverlay(pipes.pop()._marker);
+                        var pipe = pipes.pop();
+                        bmap.removeOverlay(pipe._line);
+                        pipe._line = null;
                     }
                 }
             }
@@ -419,11 +450,21 @@
                 points.push(ps)
                 return new BMap.Point(ps[0], ps[1]);
             }));
+
             pipe._line = polyline;
             pipe._points = points;
             this._changePipeStyle(pipe);
             bmap.addOverlay(pipe._line);
             pipe._overlays = [pipe._line];
+
+            //编辑相关
+            if (this.state.edit) {
+                pipe._line._type = pipe.type;
+                polyline.enableEditing();
+                polyline.addEventListener('click', function (e) {
+                    window.globalOperateNodeAndPipe && window.globalOperateNodeAndPipe(e, e.target);
+                });
+            }
         },
         _changePipeStyle(pipe, styleCallback) {
             styleCallback = styleCallback || config.pipeStyles && config.pipeStyles[pipe.type];

@@ -20,9 +20,10 @@ var org = {
 //外部操作
 HeatSourceMapApp.init({
     container: $("#container"),
-    center: [108.944267,34.223048],
+    center: [108.944267, 34.223048],
     zoom: 13,
-    roam: true
+    roam: true,
+    edit: true
 }).then(() => {
     //配置
     HeatSourceMapApp.config(config);

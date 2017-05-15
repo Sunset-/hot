@@ -6,7 +6,8 @@ var config = {
         RLJ_FIRST: 12,
         RLJ_SECOND: 13,
         PIPE_FIRST: 12,
-        PIPE_SECOND: 13
+        PIPE_SECOND: 13,
+        USER: 13
     },
     //节点图标配置
     nodeIcons: {
@@ -37,7 +38,7 @@ var config = {
                 url: '/image/mini-icons.png',
                 size: '26,32',
                 anchor: '13,32',
-                offset: ['0,0', '0,-76', '0,-38'][data.status || 0]
+                offset: ['0,0', '0,-76', '0,-38'][1 || data.status || 0]
             }
         }
     },
@@ -45,63 +46,63 @@ var config = {
     pipeStyles: {
         PIPE_FIRST(data, terminals) {
             return [{
-                strokeColor: "green",
-                strokeWeight: 3,
+                strokeColor: "#00cc66",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }, {
-                strokeColor: "orange",
-                strokeWeight: 3,
+                strokeColor: "#ff9900",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }, {
-                strokeColor: "red",
-                strokeWeight: 3,
+                strokeColor: "#ff3300",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }][data.status];
         },
         PIPE_SECOND(data, terminals) {
-            var index = 0;
-            var temperature = Math.abs(terminals.start.temperature + terminals.end.temperature) / 2;
-            if (temperature > 150) {
-                index = 2;
-            } else if (temperature > 120) {
-                index = 1;
-            }
+            var index = 1 || data.status || 0;
+            // var temperature = Math.abs(terminals.start.temperature + terminals.end.temperature) / 2;
+            // if (temperature > 150) {
+            //     index = 2;
+            // } else if (temperature > 120) {
+            //     index = 1;
+            // }
             return [{
-                strokeColor: "green",
-                strokeWeight: 2,
+                strokeColor: "#00cc66",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }, {
-                strokeColor: "orange",
-                strokeWeight: 2,
+                strokeColor: "#ff9900",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }, {
-                strokeColor: "red",
-                strokeWeight: 2,
+                strokeColor: "#ff3300",
+                strokeWeight: 4,
                 strokeOpacity: 0.8
             }][index];
         }
     },
     alarmInterval: 300,
     alarms: {
-        PIPE_FIRST: {
-            check(data, terminals) {
-                if (!terminals.start || !terminals.end) {
-                    return true;
-                }
-                var pressure = Math.abs(terminals.start.pressure - terminals.end.pressure);
-                if (pressure > 50) {
-                    return true;
-                }
-                return false;
-            },
-            style(data, terminals) {
-                return {
-                    strokeColor: "red",
-                    strokeWeight: 3,
-                    strokeOpacity: 1
-                };
-            }
-        }
+        // PIPE_FIRST: {
+        //     check(data, terminals) {
+        //         if (!terminals.start || !terminals.end) {
+        //             return true;
+        //         }
+        //         var pressure = Math.abs(terminals.start.pressure - terminals.end.pressure);
+        //         if (pressure > 50) {
+        //             return true;
+        //         }
+        //         return false;
+        //     },
+        //     style(data, terminals) {
+        //         return {
+        //             strokeColor: "red",
+        //             strokeWeight: 3,
+        //             strokeOpacity: 1
+        //         };
+        //     }
+        // }
     },
     //弹窗样式
     infos: {
@@ -129,28 +130,30 @@ var config = {
                     </div>`);
             return $div[0];
         },
-        PIPE_FIRST(data, terminals) {
-            var temperature = ((terminals.start.temperature + terminals.end.temperature) / 2).toFixed(1);
-            var pressure = Math.abs((terminals.start.pressure - terminals.end.pressure).toFixed(1));
-            var $div = $(`<div>
-                    <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#ccc;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
-                    <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#ccc;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
-                    </div>`).css({
-                width: '280px'
-            });
-            return $div[0];
-        },
-        PIPE_SECOND(data, terminals) {
-            var temperature = ((terminals.start.temperature + terminals.end.temperature) / 2).toFixed(1);
-            var pressure = Math.abs((terminals.start.pressure - terminals.end.pressure).toFixed(1));
-            var $div = $(`<div>
-                    <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#ccc;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
-                    <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#ccc;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
-                    </div>`).css({
-                width: '280px'
-            });
-            return $div[0];
-        }
+        // PIPE_FIRST(data, terminals) {
+        //     return;
+        //     var temperature = ((terminals.start.temperature + terminals.end.temperature) / 2).toFixed(1);
+        //     var pressure = Math.abs((terminals.start.pressure - terminals.end.pressure).toFixed(1));
+        //     var $div = $(`<div>
+        //             <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#ccc;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
+        //             <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#ccc;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
+        //             </div>`).css({
+        //         width: '280px'
+        //     });
+        //     return $div[0];
+        // },
+        // PIPE_SECOND(data, terminals) {
+        //     return;
+        //     var temperature = ((terminals.start.temperature + terminals.end.temperature) / 2).toFixed(1);
+        //     var pressure = Math.abs((terminals.start.pressure - terminals.end.pressure).toFixed(1));
+        //     var $div = $(`<div>
+        //             <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#ccc;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
+        //             <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#ccc;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
+        //             </div>`).css({
+        //         width: '280px'
+        //     });
+        //     return $div[0];
+        // }
     }
 };
 
