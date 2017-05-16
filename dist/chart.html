@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/echarts-all-3.js"></script>
+    <script type="text/javascript" src="js/dataTool.min.js"></script>
+    <script type="text/javascript" src="js/bmap.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=byIYTCIgUESOOHhaB8FCVHGbM4kmgh60"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+        
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        #chart {
+            width: 50%;
+            height: 50%;
+            padding: 0px;
+            margin: 0px;
+            border: 1px solid #ccc;
+        }
+        
+        .chart-box-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .chart-box-container .chart-box-tabs {
+            height: 39px;
+            border-bottom: 1px solid #dedede;
+        }
+        
+        .chart-box-container .chart-box-tabs>span {
+            display: inline-block;
+            padding: 10px;
+            font-size: 14px;
+            min-width: 80px;
+            text-align: center;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .chart-box-container .chart-box-tabs>span:hover {
+            color: #5cadff;
+        }
+        
+        .chart-box-container .chart-box-tabs>span.active {
+            color: #5cadff;
+            border-bottom: 2px solid #5cadff;
+        }
+        
+        .chart-box-container .chart-box-contents {
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+        
+        .chart-box-container .chart-box-contents>.chart-box-content {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        
+        .chart-box-container .chart-box-contents>.chart-box-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart"></div>
+    <script type="text/javascript" src="chart.js"></script>
+</body>
+
+</html>

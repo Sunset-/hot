@@ -52,6 +52,65 @@
             })
         })
     </script>
+    <style>
+        #chart {
+            position:absolute;
+            z-index:10;
+            width: 420px;
+            height: 320px;
+            right:0px;
+            top:60px;
+            background:rgba(0,0,0,0.5); 
+        }
+        
+        .chart-box-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .chart-box-container .chart-box-tabs {
+            height: 39px;
+            border-bottom: 1px solid #dedede;
+        }
+        
+        .chart-box-container .chart-box-tabs>span {
+            display: inline-block;
+            padding: 10px;
+            font-size: 14px;
+            min-width: 80px;
+            text-align: center;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .chart-box-container .chart-box-tabs>span:hover {
+            color: #5cadff;
+        }
+        
+        .chart-box-container .chart-box-tabs>span.active {
+            color: #5cadff;
+            border-bottom: 2px solid #5cadff;
+        }
+        
+        .chart-box-container .chart-box-contents {
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+        
+        .chart-box-container .chart-box-contents>.chart-box-content {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        
+        .chart-box-container .chart-box-contents>.chart-box-content.active {
+            display: block;
+        }
+    </style>
 </head>
 
 <body style="height: 100%; margin:0">
@@ -82,6 +141,7 @@
     <!--温度显示结束-->
     <!--地图内容页-->
     <div id="container"></div>
+    <div id="chart"></div>
     <!--地图内容页结束-->
     <script type="text/javascript" src="js/echarts-all-3.js"></script>
     <script type="text/javascript" src="js/dataTool.min.js"></script>

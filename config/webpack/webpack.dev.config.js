@@ -10,7 +10,8 @@ const Alias = require('./alias');
 
 var entry = {   
     product: ['webpack/hot/only-dev-server', './src/product.js'],
-    bundle: ['webpack/hot/only-dev-server', './src/main.js']
+    bundle: ['webpack/hot/only-dev-server', './src/main.js'],
+    chart: ['webpack/hot/only-dev-server', './src/chart.js']
 };
 
 var output = {
