@@ -396,11 +396,12 @@
                 node._region && node._region.setFillColor('red');
                 this.bmap.closeInfoWindow();
             });
-            if (node.click) {
-                node._marker.addEventListener('click', () => {
-                    node.click.call(null, node.data);
-                });
-            }
+            node._marker.addEventListener('click', () => {
+                var click = config.click && config.click[node.type];
+                if (typeof click == 'function') {
+                    click.call(null, node.data);
+                }
+            });
         },
         addPipes(pipes, clearType) {
             this.removePipes(clearType);

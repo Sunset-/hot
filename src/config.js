@@ -92,6 +92,7 @@ var config = {
     alarms: {
         PIPE_FIRST: {
             check(data, terminals) {
+                return false;
                 if (!terminals.start || !terminals.end) {
                     return true;
                 }
@@ -150,7 +151,7 @@ var config = {
             var temperature = (((+(terminals.start && terminals.start.temperature || 0)) + (+(terminals.end && terminals.end.temperature || 0))) / 2).toFixed(1);
             var pressure = Math.abs((+(terminals.start && terminals.start.pressure || 0)) - (+(terminals.end && terminals.end.pressure || 0))).toFixed(1);
             var $div = $(`<div>
-                    <div>二级供水管道</div>
+                    <div>一级供水管道</div>
                     <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#666;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
                     <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#666;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
                     </div>`).css({
@@ -169,6 +170,20 @@ var config = {
                 width: '280px'
             });
             return $div[0];
+        }
+    },
+    click: {
+        RYC(data) {
+            alert(`click:热源厂\ndata:${JSON.stringify(data)}`);
+        },
+        HRZ(data) {
+            alert(`click:换热站\ndata:${JSON.stringify(data)}`);
+        },
+        RLJ_FIRST(data) {
+            alert(`click:一级井\ndata:${JSON.stringify(data)}`);
+        },
+        RLJ_SECOND(data) {
+            alert(`click:二级井\ndata:${JSON.stringify(data)}`);
         }
     }
 };
