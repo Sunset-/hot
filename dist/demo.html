@@ -64,7 +64,7 @@
     <div>
         <h3>当前操作：<span id="currentOperate"></span></h3>
         <!-- 操作栏 -->
-        <p id="add_tools">
+        <div id="add_tools" style="margin-bottom:10px;">
             <span>节点：</span>
             <button id="add_ryc" class="tool" data-type="RYC" type="button">设置热源厂</button>
             <button id="save_ryc" style="display:none;" type="button">保存热源厂</button>
@@ -84,10 +84,11 @@
             <span>全部：</span>
             <button id="save" type="button">保存</button>
             <button id="clear" type="button">清空</button>
-            <button id="download" type="button">下载</button>
             <label for="import" class="label_button" type="button">导入</label>
-            <div style="width:0px;height:0px;overflow:hidden;"><input id="import" type="file" /></div>
-        </p>
+            <div style="width:0px;height:0px;overflow:hidden;display:inline-block;"><input id="import" type="file" /></div>
+            <button id="download" type="button">下载</button>
+            <span id="downloadlink"></span>
+        </div>
     </div>
     <div id="container"></div>
     <script type="text/javascript" src="bundle.js"></script>

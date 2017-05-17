@@ -22,6 +22,8 @@
         aLink.download = fileName;
         aLink.href = URL.createObjectURL(blob);
         aLink.dispatchEvent(evt);
+        aLink.text='点此下载';
+        $("#downloadlink").html(aLink);
     }
 
     var DATA = {

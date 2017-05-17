@@ -154,6 +154,13 @@
                     trigger: 'axis',
                     axisPointer: { // 坐标轴指示器，坐标轴触发有效
                         type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    formatter: function (a, b, c) {
+                        var html = [`${a[0].name}`];
+                        for (var i = 0; i < a.length; i += 2) {
+                            html.push(`<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:${a[i].color}"></span>${a[i].seriesName}：${a[i].value}%`);
+                        }
+                        return html.join('');
                     }
                 },
                 textStyle: {
