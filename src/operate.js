@@ -22,7 +22,7 @@
         aLink.download = fileName;
         aLink.href = URL.createObjectURL(blob);
         aLink.dispatchEvent(evt);
-        aLink.text='点此下载';
+        aLink.text = '点此下载';
         $("#downloadlink").html(aLink);
     }
 
@@ -284,3 +284,10 @@
             }
         }
     });
+
+    $("#search").on('click', function () {
+        var searchText = $("#searchinput").val();
+        var elements = window.HeatSourceMapApp.search(item => {
+            return item.name && (~item.name.indexOf(searchText));
+        });
+    })

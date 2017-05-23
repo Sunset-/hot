@@ -133,10 +133,39 @@
         strokeOpacity: 0.5
     };
 
-    //配置
-    const config = {
+    const DEFAULT_REGION_STYLE = {
+        strokeColor: "orange",
+        fillColor: "red",
+        fillOpacity: 0.2,
+        strokeWeight: 2,
+        strokeOpacity: 0.5
+    }
+    const DEFAULT_REGION_ACTIVE_STYLE = {
+        strokeColor: "orange",
+        fillColor: "red",
+        fillOpacity: 0.2,
+        strokeWeight: 2,
+        strokeOpacity: 0.5
+    }
 
-    };
+    //配置
+    const config = {};
+
+    function getConfig(namaspace, defaults) {
+        var parent = config;
+        if (namaspace && namaspace.length) {
+            var ns = namaspace.split('.');
+            for (var i = 0, l = ns.length; i < l; i++) {
+                if (parent[ns[i]] != void 0) {
+                    parent = parent[ns[i]];
+                } else {
+                    return defaults;
+                }
+            }
+            return parent;
+        }
+        return defaults;
+    }
 
     var region = [];
 
@@ -259,7 +288,10 @@
                 (nodeMap[node.type] || (nodeMap[node.type] = [])).push(node);
                 this.state.point_node[`${node._point.lng},${node._point.lat}`] = node;
             });
-            this.refresh(nodes);
+            setTimeout(() => {
+                this.refresh(nodes);
+            }, 0);
+            return nodes;
         },
         getNodeByPoint(point) {
             if (!this.state.point_node[point]) {
@@ -314,16 +346,18 @@
                     var ps = p.split(',');
                     return new BMap.Point(+ps[0], +ps[1], )
                 })
-                var polygon = new BMap.Polygon(points, {
-                    strokeColor: "orange",
-                    fillColor: "red",
-                    fillOpacity: 0.2,
-                    strokeWeight: 2,
-                    strokeOpacity: 0.5
-                });
+                var polygon = new BMap.Polygon(points, getConfig(`regionStyles.${node.type}.normal`, DEFAULT_REGION_STYLE));
                 bmap.addOverlay(polygon);
                 node._region = polygon;
-                node._overlays.push(node._region)
+                node._overlays.push(node._region);
+                node._region.addEventListener('mouseover', () => {
+                    //辖区高亮
+                    this._changeAreaStyle(node._region, getConfig(`regionStyles.${node.type}.active`, DEFAULT_REGION_ACTIVE_STYLE));
+                });
+                node._region.addEventListener('mouseout', () => {
+                    //辖区去除高亮
+                    this._changeAreaStyle(node._region, getConfig(`regionStyles.${node.type}.normal`, DEFAULT_REGION_STYLE));
+                });
             }
 
             //编辑相关
@@ -358,6 +392,14 @@
                 });
             }
         },
+        _changeAreaStyle(area, style) {
+            if (area && style) {
+                Object.keys(style).forEach(key => {
+                    var method = `set${key.substr(0,1).toUpperCase()+key.substring(1,key.length)}`;
+                    area[method] && area[method](style[key]);
+                });
+            }
+        },
         _changeNodeIcon(node) {
             var iconCallback = config.nodeIcons && config.nodeIcons[node.type];
             if (iconCallback) {
@@ -387,13 +429,9 @@
         _bindNodeEvent(node) {
             //区域高亮联动
             node._marker.addEventListener('mouseover', () => {
-                //辖区高亮
-                node._region && node._region.setFillColor('orange');
                 this._openInfoWindow(node, node._marker.point);
             });
             node._marker.addEventListener('mouseout', () => {
-                //辖区去除高亮
-                node._region && node._region.setFillColor('red');
                 this.bmap.closeInfoWindow();
             });
             node._marker.addEventListener('click', () => {
@@ -414,7 +452,9 @@
                     (pipeMap[pipe.type] || (pipeMap[pipe.type] = [])).push(pipe);
                 }
             });
-            this.refresh(null, pipes);
+            setTimeout(() => {
+                this.refresh(null, pipes);
+            }, 0);
             return pipes;
         },
         /**
@@ -481,7 +521,8 @@
             }
             var line = pipe._line;
             Object.keys(opts).forEach(key => {
-                line[`set${key.substr(0,1).toUpperCase()+key.substring(1,key.length)}`](opts[key]);
+                var method = `set${key.substr(0,1).toUpperCase()+key.substring(1,key.length)}`;
+                line[method] && line[method](opts[key]);
             });
         },
         _getPipeTerminals(pipe) {
@@ -589,6 +630,38 @@
                 overlay._infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象 
             }
             this.bmap.openInfoWindow(overlay._infoWindow, point || overlay._point); //开启信息窗口
+        },
+        /**
+         * 搜索
+         */
+        search(filter) {
+            if (typeof filter != 'function') {
+                throw new Error('过滤条件应为一个function');
+            }
+            var nodeMap = this.state.nodes,
+                pipeMap = this.state.pipes;
+            var resultPoints = [];
+            var resultElements = [];
+            Object.keys(nodeMap).forEach(type => {
+                nodeMap[type].forEach(node => {
+                    if (filter(node.data)) {
+                        resultElements.push(node.data);
+                        resultPoints.push(node._marker.point);
+                    }
+                });
+            });
+            Object.keys(pipeMap).forEach(type => {
+                pipeMap[type].forEach(pipe => {
+                    if (filter(pipe.data)) {
+                        resultElements.push(pipe.data);
+                        resultPoints = resultPoints.concat(pipe.getPath());
+                    }
+                });
+            });
+            if (resultPoints.length) {
+                this.bmap.setViewport(resultPoints);
+            }
+            return resultElements;
         }
     };
 

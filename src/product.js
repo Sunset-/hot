@@ -187,3 +187,13 @@ HeatSourceChartApp.setEnergyData([{
         mei: 61
     }
 }]);
+
+$("#searchbutton").on('click', function () {
+    var searchText = $("#searchinput").val();
+    var elements = window.HeatSourceMapApp.search(item => {
+        return item.name && (~item.name.indexOf(searchText));
+    });
+    if (elements.length == 0) {
+        alert('未找到符合条件的节点');
+    }
+})

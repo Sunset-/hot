@@ -51,6 +51,24 @@ var config = {
             }
         }
     },
+    regionStyles: {
+        RYC: {
+            normal: {
+                strokeColor: "orange",
+                fillColor: "red",
+                fillOpacity: 0.2,
+                strokeWeight: 2,
+                strokeOpacity: 0.5
+            },
+            active: {
+                strokeColor: "orange",
+                fillColor: "orange",
+                fillOpacity: 0.2,
+                strokeWeight: 2,
+                strokeOpacity: 0.5
+            }
+        }
+    },
     //管道样式回调
     pipeStyles: {
         PIPE_FIRST(data, terminals) {
@@ -144,6 +162,13 @@ var config = {
                     <div>二级热力井</div>
                     <div>温度：${data.temperature}℃</div>
                     <div>压力：${data.pressure}</div>
+                    </div>`);
+            return $div[0];
+        },
+        USER(data) {
+            var $div = $(`<div>
+                    <div>${data&&data.name}</div>
+                    <div>实时温度：${data&&data.temperature}℃</div>
                     </div>`);
             return $div[0];
         },
