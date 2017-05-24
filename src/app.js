@@ -222,9 +222,7 @@
                 this.thens.shift().call(this);
             }
             this.inited = true;
-            map.setMapStyle({
-                style: 'dark'
-            });
+            map.setMapStyle(options.mapStyle);
             return;
 
 
@@ -311,6 +309,7 @@
             }
             var bmap = this.bmap;
             if (clearType === true) {
+                this.state.nodes = {};
                 this.state.point_node = {};
                 bmap.clearOverlays();
             } else {
@@ -326,6 +325,7 @@
                         node._marker = null;
                         node._region = null;
                     }
+                    delete this.state.nodes[clearType];
                 }
             }
         },
@@ -414,10 +414,15 @@
                     var size = (iconOpts.size || '30,30').split(',');
                     var anchor = (iconOpts.anchor || '0,0').split(',');
                     var offset = (iconOpts.offset || '0,0').split(',');
-                    var icon = new BMap.Icon(iconOpts.url, new BMap.Size(size[0], size[1]), {
+                    var imageSize = iconOpts.imageSize && iconOpts.imageSize.split(',');
+                    var opts = {
                         anchor: new BMap.Size(anchor[0], anchor[1]),
                         imageOffset: new BMap.Size(offset[0], offset[1])
-                    });
+                    };
+                    if (imageSize && imageSize.length == 2) {
+                        opts.imageSize = new BMap.Size(imageSize[0], imageSize[1]);
+                    }
+                    var icon = new BMap.Icon(iconOpts.url, new BMap.Size(size[0], size[1]), opts);
                     node._iconOffset = {
                         width: size[0],
                         height: size[1]
@@ -435,8 +440,14 @@
                 this.bmap.closeInfoWindow();
             });
             node._marker.addEventListener('click', () => {
-                var click = config.click && config.click[node.type];
+                var click = getConfig(`click.${node.type}`) || getConfig('click');
                 if (typeof click == 'function') {
+                    var beforeClick = getConfig(`beforeClick.${node.type}`) || getConfig('beforeClick');
+                    if (typeof beforeClick == 'function') {
+                        if (beforeClick.call(null, node.data) === false) {
+                            return;
+                        }
+                    }
                     click.call(null, node.data);
                 }
             });
@@ -469,6 +480,7 @@
             }
             var bmap = this.bmap;
             if (clearType === true) {
+                this.state.pipes = {};
                 bmap.clearOverlays();
             } else {
                 var pipes = this.state.pipes[clearType];
@@ -478,6 +490,7 @@
                         bmap.removeOverlay(pipe._line);
                         pipe._line = null;
                     }
+                    delete this.state.pipes[clearType];
                 }
             }
         },
@@ -617,8 +630,17 @@
             });
         },
         _openInfoWindow(overlay, point) {
-            var infoCallback = config.infos && config.infos[overlay.type];
+            var infoCallback = getConfig(`info.${overlay.type}`) || getConfig('info');
             if (!infoCallback) {
+                return;
+            }
+            if (typeof infoCallback != 'function') {
+                throw new Error('信息框回调必须为一个function');
+            }
+            var data = overlay.data,
+                terminalDatas = this._getPipeTerminalDatas(overlay);
+            var beforeInfoCallback = getConfig(`beforeInfo.${overlay.type}`) || getConfig('beforeInfo');
+            if ((typeof beforeInfoCallback == 'function') && beforeInfoCallback.call(null, data, terminalDatas) === false) {
                 return;
             }
             if (!overlay._infoWindow) {
@@ -626,7 +648,7 @@
                 var opts = {
                     offset: new BMap.Size(0, -(offset.height || 0))
                 }
-                var content = (typeof infoCallback == 'function') ? infoCallback(overlay.data, this._getPipeTerminalDatas(overlay)) : infoCallback;
+                var content = infoCallback.call(null, data, terminalDatas);
                 overlay._infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象 
             }
             this.bmap.openInfoWindow(overlay._infoWindow, point || overlay._point); //开启信息窗口

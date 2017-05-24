@@ -21,33 +21,37 @@ var config = {
         RYC(data) {
             return {
                 url: '/image/mini-icons.png',
-                size: '26,32',
-                anchor: '13,32',
-                offset: ['-32,0', '-32,-76', '-32,-38'][data.status || 0]
+                size: '46,59',
+                imageSize: '160,195',
+                anchor: '23,56',
+                offset: ['-57,0', '-57,-136', '-57,-66'][data.status || 0]
             };
         },
         HRZ(data) {
             return {
                 url: '/image/mini-icons.png',
-                size: '26,32',
-                anchor: '13,32',
-                offset: ['-66,0', '-66,-76', '-66,-38'][data.status || 0]
+                size: '32,42',
+                imageSize: '110,134',
+                anchor: '16,40',
+                offset: ['-79,0', '-79,-93', '-79,-45'][data.status || 0]
             };
         },
         RLJ_FIRST(data) {
             return {
                 url: '/image/mini-icons.png',
-                size: '26,32',
-                anchor: '13,32',
-                offset: ['0,0', '0,-76', '0,-38'][data.status || 0]
-            }
+                size: '32,42',
+                imageSize: '110,134',
+                anchor: '16,40',
+                offset: ['0,0', '0,-93', '0,-45'][data.status || 0]
+            };
         },
         RLJ_SECOND(data) {
             return {
                 url: '/image/mini-icons.png',
-                size: '26,32',
-                anchor: '13,32',
-                offset: ['0,0', '0,-76', '0,-38'][1 || data.status || 0]
+                size: '21,28',
+                anchor: '10,26',
+                imageSize: '72,88',
+                offset: ['0,0', '0,-60', '0,-30'][data.status || 0]
             }
         }
     },
@@ -110,7 +114,6 @@ var config = {
     alarms: {
         PIPE_FIRST: {
             check(data, terminals) {
-                return false;
                 if (!terminals.start || !terminals.end) {
                     return true;
                 }
@@ -123,14 +126,19 @@ var config = {
             style(data, terminals) {
                 return {
                     strokeColor: "red",
-                    strokeWeight: 3,
+                    strokeWeight: 6,
                     strokeOpacity: 1
                 };
             }
         }
     },
     //弹窗样式
-    infos: {
+    beforeInfo: {
+        RYC(data, termals) {
+
+        }
+    },
+    info: {
         RYC(data) {
             var $div = $(`<div>
                     <div>热源厂：${data.name}</div>
@@ -196,6 +204,9 @@ var config = {
             });
             return $div[0];
         }
+    },
+    beforeClick: {
+        RYC(data) {}
     },
     click: {
         RYC(data) {
