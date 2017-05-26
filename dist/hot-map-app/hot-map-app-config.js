@@ -76,7 +76,7 @@
                     size: '26,34',
                     anchor: '13,32',
                     imageSize: '26,110',
-                    offset: ['0,0', '0,-76', '0,-38'][2 || data.status || 0]
+                    offset: ['0,0', '0,-76', '0,-38'][data.status || 0]
                 };
             }
         },
@@ -171,71 +171,71 @@
         },
         //信息框样式（返回dom节点）[节点数据/管道数据，两端节点数据]
         info: {
-            RYC: function (data) {
-                var $div = $(`<div>
-                    <div>热源厂：${data.name}</div>
-                    <div>温度：${data.temperature}℃</div>
-                    <div>压力：${data.pressure}</div>
-                    <div>状态：${STATUS_ENUMS[data.status]||STATUS_ENUMS.other}</div>
-                    </div>`);
-                return $div[0];
-            },
-            HRZ: function (data) {
-                var $div = $(`<div>
-                    <div>换热站：${data.name}</div>
-                    <div>温度：${data.temperature}℃</div>
-                    <div>压力：${data.pressure}</div>
-                    <div>状态：${STATUS_ENUMS[data.status]||STATUS_ENUMS.other}</div>
-                    </div>`);
-                return $div[0];
-            },
-            RLJ_FIRST: function (data) {
-                var $div = $(`<div>
-                    <div>一级热力井</div>
-                    <div>温度：${data.temperature}℃</div>
-                    <div>压力：${data.pressure}</div>
-                    </div>`);
-                return $div[0];
-            },
-            RLJ_SECOND: function (data) {
-                var $div = $(`<div>
-                    <div>二级热力井</div>
-                    <div>温度：${data.temperature}℃</div>
-                    <div>压力：${data.pressure}</div>
-                    </div>`);
-                return $div[0];
-            },
-            USER: function (data) {
-                var $div = $(`<div>
-                    <div>${data&&data.name}</div>
-                    <div>实时温度：${data&&data.temperature}℃</div>
-                    </div>`);
-                return $div[0];
-            },
-            PIPE_FIRST: function (data, terminals) {
-                var temperature = (((+(terminals.start && terminals.start.temperature || 0)) + (+(terminals.end && terminals.end.temperature || 0))) / 2).toFixed(1);
-                var pressure = Math.abs((+(terminals.start && terminals.start.pressure || 0)) - (+(terminals.end && terminals.end.pressure || 0))).toFixed(1);
-                var $div = $(`<div>
-                    <div>一级供水管道</div>
-                    <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#666;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
-                    <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#666;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
-                    </div>`).css({
-                    width: '280px'
-                });
-                return $div[0];
-            },
-            PIPE_SECOND: function (data, terminals) {
-                var temperature = (((+(terminals.start && terminals.start.temperature || 0)) + (+(terminals.end && terminals.end.temperature || 0))) / 2).toFixed(1);
-                var pressure = Math.abs((+(terminals.start && terminals.start.pressure || 0)) - (+(terminals.end && terminals.end.pressure || 0))).toFixed(1);
-                var $div = $(`<div>
-                    <div>二级供水管道</div>
-                    <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#666;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
-                    <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#666;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
-                    </div>`).css({
-                    width: '280px'
-                });
-                return $div[0];
-            }
+            // RYC: function (data) {
+            //     var $div = $(`<div>
+            //         <div>热源厂：${data.name}</div>
+            //         <div>温度：${data.temperature}℃</div>
+            //         <div>压力：${data.pressure}</div>
+            //         <div>状态：${STATUS_ENUMS[data.status]||STATUS_ENUMS.other}</div>
+            //         </div>`);
+            //     return $div[0];
+            // },
+            // HRZ: function (data) {
+            //     var $div = $(`<div>
+            //         <div>换热站：${data.name}</div>
+            //         <div>温度：${data.temperature}℃</div>
+            //         <div>压力：${data.pressure}</div>
+            //         <div>状态：${STATUS_ENUMS[data.status]||STATUS_ENUMS.other}</div>
+            //         </div>`);
+            //     return $div[0];
+            // },
+            // RLJ_FIRST: function (data) {
+            //     var $div = $(`<div>
+            //         <div>一级热力井</div>
+            //         <div>温度：${data.temperature}℃</div>
+            //         <div>压力：${data.pressure}</div>
+            //         </div>`);
+            //     return $div[0];
+            // },
+            // RLJ_SECOND: function (data) {
+            //     var $div = $(`<div>
+            //         <div>二级热力井</div>
+            //         <div>温度：${data.temperature}℃</div>
+            //         <div>压力：${data.pressure}</div>
+            //         </div>`);
+            //     return $div[0];
+            // },
+            // USER: function (data) {
+            //     var $div = $(`<div>
+            //         <div>${data&&data.name}</div>
+            //         <div>实时温度：${data&&data.temperature}℃</div>
+            //         </div>`);
+            //     return $div[0];
+            // },
+            // PIPE_FIRST: function (data, terminals) {
+            //     var temperature = (((+(terminals.start && terminals.start.temperature || 0)) + (+(terminals.end && terminals.end.temperature || 0))) / 2).toFixed(1);
+            //     var pressure = Math.abs((+(terminals.start && terminals.start.pressure || 0)) - (+(terminals.end && terminals.end.pressure || 0))).toFixed(1);
+            //     var $div = $(`<div>
+            //         <div>一级供水管道</div>
+            //         <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#666;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
+            //         <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#666;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
+            //         </div>`).css({
+            //         width: '280px'
+            //     });
+            //     return $div[0];
+            // },
+            // PIPE_SECOND: function (data, terminals) {
+            //     var temperature = (((+(terminals.start && terminals.start.temperature || 0)) + (+(terminals.end && terminals.end.temperature || 0))) / 2).toFixed(1);
+            //     var pressure = Math.abs((+(terminals.start && terminals.start.pressure || 0)) - (+(terminals.end && terminals.end.pressure || 0))).toFixed(1);
+            //     var $div = $(`<div>
+            //         <div>二级供水管道</div>
+            //         <div style="font-size:14px;">平均温度：${temperature}℃<span style="font-size:12px;color:#666;">（${terminals.start.temperature}℃ - ${terminals.end.temperature}℃）</span></div>
+            //         <div style="font-size:14px;">压差：${pressure}<span style="font-size:12px;color:#666;">（${terminals.start.pressure} - ${terminals.end.pressure}）</span></div>
+            //         </div>`).css({
+            //         width: '280px'
+            //     });
+            //     return $div[0];
+            // }
         },
         //节点点击前回调，显式返回false，则阻止点击事件
         beforeClick: {

@@ -14,7 +14,7 @@ var entry = {   
 };
 
 var output = {
-    path: path.resolve(__dirname, '../../dist'),
+    path: path.resolve(__dirname, '../../dist/hot-map-app'),
     filename: '[name].js'
 };
 
@@ -50,17 +50,15 @@ var config = {
         return [autoprefixer, precss];
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         NODE_ENV: '"production"'
+        //     }
+        // }),
         new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
+            compress: false
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        // new webpack.optimize.OccurenceOrderPlugin(),
     ]
 }
 
