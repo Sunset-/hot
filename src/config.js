@@ -53,6 +53,15 @@ var config = {
                 imageSize: '72,88',
                 offset: ['0,0', '0,-60', '0,-30'][data.status || 0]
             }
+        },
+        USER(data) {
+            return {
+                url: '/image/mini-user-icons.png',
+                size: '26,34',
+                anchor: '13,32',
+                imageSize: '26,110',
+                offset: ['0,0', '0,-76', '0,-38'][2 || data.status || 0]
+            };
         }
     },
     regionStyles: {

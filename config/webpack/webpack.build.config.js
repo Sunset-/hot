@@ -9,9 +9,8 @@ const Alias = require('./alias');
 
 
 var entry = {   
-    product: ['./src/product.js'],
-    bundle: ['./src/main.js'],
-    chart: ['./src/chart.js']
+    'hot-map-app': ['./src/app.js'],
+    'hot-chart-app': ['./src/chart.js']
 };
 
 var output = {
