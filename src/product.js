@@ -1,6 +1,6 @@
 import './app';
 import config from './config';
-import mapDemoData from './data';
+import mapDemoData from '../dist/product-data';
 
 //DEMO
 //总公司

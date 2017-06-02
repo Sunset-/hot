@@ -66,12 +66,14 @@ var config = {
     },
     regionStyles: {
         RYC: {
-            normal: {
-                strokeColor: "orange",
-                fillColor: "red",
-                fillOpacity: 0.2,
-                strokeWeight: 2,
-                strokeOpacity: 0.5
+            normal(data) {
+                return {
+                    strokeColor: "orange",
+                    fillColor: 'red',
+                    fillOpacity: 0.2,
+                    strokeWeight: 2,
+                    strokeOpacity: 0.5
+                }
             },
             active: {
                 strokeColor: "orange",

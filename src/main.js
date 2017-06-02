@@ -1,10 +1,4 @@
 import './app';
-import rycs from './data-ryc';
-import hrzs from './data-hrz';
-import rljs1 from './data-rlj1';
-import rljs2 from './data-rlj2';
-import pipes from './data-pipe1';
-import pipes2 from './data-pipe2';
 
 import config from './config';
 import operate from './operate';
