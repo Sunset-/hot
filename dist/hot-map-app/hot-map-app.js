@@ -10,7 +10,6 @@
 
     //依赖库
     var DEP_LIB = {
-        'echarts': 'echarts',
         'BMap': '百度地图',
         'jQuery': 'jQuery'
     };
@@ -167,6 +166,14 @@
             return parent;
         }
         return defaults;
+    }
+
+    function calculateConfig(config) {
+        var res = config;
+        if (typeof config == 'function') {
+            res = config.apply(null, [].slice.call(arguments, 1));
+        }
+        return res;
     }
 
     var region = [];
@@ -356,17 +363,17 @@
                     var ps = p.split(',');
                     return new BMap.Point(+ps[0], +ps[1]);
                 });
-                var polygon = new BMap.Polygon(points, getConfig('regionStyles.' + node.type + '.normal', DEFAULT_REGION_STYLE));
+                var polygon = new BMap.Polygon(points, calculateConfig(getConfig('regionStyles.' + node.type + '.normal', DEFAULT_REGION_STYLE), node.data));
                 bmap.addOverlay(polygon);
                 node._region = polygon;
                 node._overlays.push(node._region);
                 node._region.addEventListener('mouseover', function () {
                     //辖区高亮
-                    _this5._changeAreaStyle(node._region, getConfig('regionStyles.' + node.type + '.active', DEFAULT_REGION_ACTIVE_STYLE));
+                    _this5._changeAreaStyle(node._region, calculateConfig(getConfig('regionStyles.' + node.type + '.active', DEFAULT_REGION_ACTIVE_STYLE), node.data));
                 });
                 node._region.addEventListener('mouseout', function () {
                     //辖区去除高亮
-                    _this5._changeAreaStyle(node._region, getConfig('regionStyles.' + node.type + '.normal', DEFAULT_REGION_STYLE));
+                    _this5._changeAreaStyle(node._region, calculateConfig(getConfig('regionStyles.' + node.type + '.normal', DEFAULT_REGION_STYLE), node.data));
                 });
             }
 

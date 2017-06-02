@@ -84,12 +84,14 @@
         regionStyles: {
             RYC: {
                 //普通样式
-                normal: {
-                    strokeColor: "orange",
-                    fillColor: "red",
-                    fillOpacity: 0.2,
-                    strokeWeight: 2,
-                    strokeOpacity: 0.5
+                normal: function (data) {
+                    return {
+                        strokeColor: "orange",
+                        fillColor: data.status == '1' ? "purple" : 'yellowgreen',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                    }
                 },
                 //高亮样式
                 active: {

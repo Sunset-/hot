@@ -8,7 +8,6 @@
 
     //依赖库
     const DEP_LIB = {
-        'echarts': 'echarts',
         'BMap': '百度地图',
         'jQuery': 'jQuery'
     };
