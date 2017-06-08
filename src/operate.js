@@ -202,45 +202,93 @@
             }
         };
 
+    // function globalAddPipe(e) {
+    //     var se = startAndEnd[CURRENT_ADD_PIPE_TYPE];
+    //     if (currentPipe == null) {
+    //         editingPipe = null;
+    //         if (e.overlay) {
+    //             var type = e.overlay._type;
+    //             if (se.start[type]) {
+    //                 currentPipe = {
+    //                     type: CURRENT_ADD_PIPE_TYPE,
+    //                     path: `${e.overlay.point.lng},${e.overlay.point.lat}`,
+    //                     data: {
+    //                         type: CURRENT_ADD_PIPE_TYPE,
+    //                         status: 0
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         editingPipe = currentPipe;
+    //         if (e.overlay) {
+    //             var type = e.overlay._type;
+    //             if (se.end[type]) {
+    //                 currentPipe.path += `;${e.overlay.point.lng},${e.overlay.point.lat}`;
+    //                 currentPipe = null;
+    //             }
+    //         } else {
+    //             currentPipe.path += `;${e.point.lng},${e.point.lat}`;
+    //         }
+    //     }
+    //     var pipe = currentPipe || editingPipe;
+    //     if (pipe && pipe.path.split(';').length > 1) {
+    //         if (!pipe._line) {
+    //             var pipes = window.HeatSourceMapApp.addPipes([pipe]);
+    //             DATA[DATA_MAP_REL[CURRENT_ADD_PIPE_TYPE]].push(pipe);
+    //         } else {
+    //             pipe._line.setPath(pipe.path.split(';').map(p => {
+    //                 var ps = p.split(',');
+    //                 return new BMap.Point(ps[0], ps[1]);
+    //             }))
+    //         }
+    //     }
+    // }    
+
     function globalAddPipe(e) {
+        var finish = false;
         var se = startAndEnd[CURRENT_ADD_PIPE_TYPE];
-        if (currentPipe == null) {
-            editingPipe = null;
-            if (e.overlay) {
-                var type = e.overlay._type;
-                if (se.start[type]) {
+        var overlay = e.overlay;
+        var type = overlay && overlay._type;
+        if (type) {
+            var canStart = se.start[type],
+                canEnd = se.end[type];
+            if (currentPipe == null) {
+                if (canStart) {
                     currentPipe = {
                         type: CURRENT_ADD_PIPE_TYPE,
-                        path: `${e.overlay.point.lng},${e.overlay.point.lat}`,
+                        path: `${overlay.point.lng},${overlay.point.lat}`,
                         data: {
                             type: CURRENT_ADD_PIPE_TYPE,
                             status: 0
                         }
                     }
                 }
-            }
-        } else {
-            editingPipe = currentPipe;
-            if (e.overlay) {
-                var type = e.overlay._type;
-                if (se.end[type]) {
+            } else {
+                if (canEnd) {
                     currentPipe.path += `;${e.overlay.point.lng},${e.overlay.point.lat}`;
-                    currentPipe = null;
+                    finish = true;
+                } else if (canStart) {
+                    currentPipe.path = `${overlay.point.lng},${overlay.point.lat}`;
                 }
-            } else {
-                currentPipe.path += `;${e.point.lng},${e.point.lat}`;
             }
+        } else if (currentPipe) {
+            currentPipe.path += `;${e.point.lng},${e.point.lat}`;
         }
-        var pipe = currentPipe || editingPipe;
-        if (pipe && pipe.path.split(';').length > 1) {
-            if (!pipe._line) {
-                var pipes = window.HeatSourceMapApp.addPipes([pipe]);
-                DATA[DATA_MAP_REL[CURRENT_ADD_PIPE_TYPE]].push(pipe);
+
+
+        if (currentPipe && currentPipe.path.split(';').length > 1) {
+            if (!currentPipe._line) {
+                var pipes = window.HeatSourceMapApp.addPipes([currentPipe]);
+                DATA[DATA_MAP_REL[CURRENT_ADD_PIPE_TYPE]].push(currentPipe);
             } else {
-                pipe._line.setPath(pipe.path.split(';').map(p => {
+                currentPipe._line.setPath(currentPipe.path.split(';').map(p => {
                     var ps = p.split(',');
                     return new BMap.Point(ps[0], ps[1]);
                 }))
+            }
+            if (finish) {
+                currentPipe = null;
             }
         }
     }

@@ -3,6 +3,8 @@ import './app';
 import config from './config';
 import operate from './operate';
 
+config.click = config.info = {};
+
 
 //DEMO
 //总公司

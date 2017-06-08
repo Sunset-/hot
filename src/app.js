@@ -642,6 +642,7 @@
                 return;
             }
             if (typeof infoCallback != 'function') {
+                return;
                 throw new Error('信息框回调必须为一个function');
             }
             var data = overlay.data,

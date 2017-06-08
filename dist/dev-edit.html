@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/echarts-all-3.js"></script>
+    <script type="text/javascript" src="js/dataTool.min.js"></script>
+    <script type="text/javascript" src="js/bmap.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .label_button {
+            -webkit-appearance: button;
+            -webkit-writing-mode: horizontal-tb;
+            padding: 1px 6px;
+            text-rendering: auto;
+            color: initial;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            margin: 0em 0em 0em 0em;
+            font: 13.3333px Arial;
+            align-items: flex-start;
+            text-align: center;
+            cursor: default;
+            color: buttontext;
+            border-image-source: initial;
+            border-image-slice: initial;
+            border-image-width: initial;
+            border-image-outset: initial;
+            border-image-repeat: initial;
+            background-color: buttonface;
+            box-sizing: border-box;
+            border-width: 2px;
+            border-style: outset;
+            border-color: buttonface;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h3>当前操作：<span id="currentOperate"></span></h3>
+        <!-- 操作栏 -->
+        <div id="add_tools" style="margin-bottom:10px;">
+            <span>节点：</span>
+            <button id="add_ryc" class="tool" data-type="RYC" type="button">设置热源厂</button>
+            <button id="save_ryc" style="display:none;" type="button">保存热源厂</button>
+            <button id="add_rlj1" class="tool" data-type="RLJ_FIRST" type="button">设置一级井</button>
+            <button id="save_rlj1" style="display:none;" type="button">保存一级井</button>
+            <button id="add_hrz" class="tool" data-type="HRZ" type="button">设置换热站</button>
+            <button id="save_hrz" style="display:none;" type="button">保存换热站</button>
+            <button id="add_rlj2" class="tool" data-type="RLJ_SECOND" type="button">设置二级井</button>
+            <button id="save_rlj2" style="display:none;" type="button">保存二级井</button>
+            <button id="add_user" class="tool" data-type="USER" type="button">设置用户</button>
+            <button id="save_user" style="display:none;" type="button">保存用户</button>
+            <span>管道：</span>
+            <button id="add_pipe1" class="tool" data-type="PIPE_FIRST" type="button">设置一级管道</button>
+            <button id="save_pipe1" style="display:none;" type="button">保存一级管道</button>
+            <button id="add_pipe2" class="tool" data-type="PIPE_SECOND" type="button">设置二级管道</button>
+            <button id="save_pipe2" style="display:none;" type="button">保存二级管道</button>
+            <span>全部：</span>
+            <button id="save" type="button">保存</button>
+            <button id="clear" type="button">清空</button>
+            <label for="import" class="label_button" type="button">导入</label>
+            <div style="width:0px;height:0px;overflow:hidden;display:inline-block;"><input id="import" type="file" /></div>
+            <button id="download" type="button">下载</button>
+            <span id="downloadlink"></span>
+            <span>搜索：</span>
+            <input id="searchinput" type="text" />
+            <button id="search" type="button">搜索</button>
+        </div>
+    </div>
+    <div id="container"></div>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=byIYTCIgUESOOHhaB8FCVHGbM4kmgh60"></script>
+    <!-- 热源地图应用 -->
+    <script type="text/javascript" src="bundle.js"></script>
+</body>
+
+</html>
