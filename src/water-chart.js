@@ -1,5 +1,134 @@
 (function () {
     var symbolSize = 10;
+
+
+    var items = [{
+        high: 80,
+        low: 20
+    }, {
+        high: 70,
+        low: 25
+    }, {
+        high: 60,
+        low: 30
+    }, {
+        high: 50,
+        low: 35
+    }, {
+        high: 45,
+        low: 40
+    }];
+
+
+    var points = [];
+    var lines = [];
+
+
+    items.forEach((item, index) => {
+        points.push([(index + 1) * 5, item.high]);
+        points.push([(index + 1) * 5, item.low]);
+
+        lines.push({
+            coords: [
+                [(index + 1) * 5, item.high], // 起点
+                [(index + 1) * 5, item.low] // 终点
+            ],
+            tooltip: {
+                formatter() {
+                    return '瓦咔咔'
+                }
+            },
+            lineStyle: {
+                normal: {
+                    color: {
+                        type: 'linear',
+                        x: 0.5,
+                        y: 1,
+                        x2: 1,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0,
+                            color: 'red' // 0% 处的颜色
+                        }, {
+                            offset: 1,
+                            color: 'blue' // 100% 处的颜色
+                        }],
+                        globalCoord: false // 缺省为 false
+                    },
+                    width: 3
+                }
+            }
+        });
+        if (index > 0) {
+            var last = items[index - 1];
+            lines.push({
+                coords: [
+                    [(index) * 5, last.high], // 起点
+                    [(index + 1) * 5, item.high] // 终点
+                ],
+                tooltip: {
+                    formatter() {
+                        return '瓦咔咔'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: {
+                            type: 'linear',
+                            x: 0.5,
+                            y: 1,
+                            x2: 1,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'red' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'blue' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        width: 3
+                    }
+                }
+            });
+            lines.push({
+                coords: [
+                    [(index) * 5, last.low], // 起点
+                    [(index + 1) * 5, item.low] // 终点
+                ],
+                tooltip: {
+                    formatter() {
+                        return '瓦咔咔'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: {
+                            type: 'linear',
+                            x: 0.5,
+                            y: 1,
+                            x2: 1,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'red' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'blue' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        width: 3
+                    }
+                }
+            });
+
+        }
+    });
+
+
+
     var data = [
         [5, 80],
         [10, 78],
@@ -27,7 +156,7 @@
             [10, 22],
             [15, 24],
             [20, 26],
-            [25,  ],
+            [25, ],
             [30, 30],
             [35, 32],
             [40, 34]
@@ -111,83 +240,18 @@
             }
         ],
         series: [{
-            id: 'a',
-            type: 'line',
-            // smooth: true,
-            symbolSize: symbolSize,
-            data: datas[0]
-        }, {
-            id: 'b',
-            type: 'line',
-            // smooth: true,
-            symbolSize: symbolSize,
-            data: datas[1]
-        }, {
-            id: 'c',
-            type: 'line',
-            // smooth: true,
-            symbolSize: symbolSize,
-            data: datas[2],
-            markLine: {
-                data: [
-                    [{
-                            coord: [0, 40]
-                        },
-                        {
-                            coord: [40, 40]
-                        }
-                    ]
-                ]
-            }
-        }, {
-            id: 'd',
-            type: 'line',
-            // smooth: true,
-            symbolSize: symbolSize,
-            data: datas[3]
-        }, {
-            id: 'e',
-            type: 'line',
-            // smooth: true,
-            symbolSize: symbolSize,
-            data: datas[4]
+            name: 'I',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            data: points
         }, {
             id: 'f',
             type: 'lines',
             coordinateSystem: 'cartesian2d',
             // smooth: true,
             symbolSize: symbolSize,
-            data: [{
-                coords: [
-                    [15, 66], // 起点
-                    [30, 62] // 终点
-                ],
-                tooltip: {
-                    formatter(){
-                        return '瓦咔咔'
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        color: {
-                            type: 'linear',
-                            x: 0.5,
-                            y: 1,
-                            x2: 1,
-                            y2: 1,
-                            colorStops: [{
-                                offset: 0,
-                                color: 'red' // 0% 处的颜色
-                            }, {
-                                offset: 1,
-                                color: 'blue' // 100% 处的颜色
-                            }],
-                            globalCoord: false // 缺省为 false
-                        },
-                        width : 35
-                    }
-                }
-            }]
+            data: lines
         }],
         tooltip: {
             trigger: 'item'
