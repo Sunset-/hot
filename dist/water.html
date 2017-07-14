@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="js/echarts-all-3.js"></script>
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="css/jquery.datetimepicker.css" />
+    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/jquery.datetimepicker.full.min.js"></script>
     <title>Water</title>
 
     <style>
-            html {
+        html {
             height: 100%;
         }
-        
+
         body {
             height: 100%;
             margin: 0;
         }
-        
-        #chart {
-            width: 50%;
-            height: 50%;
-            padding: 0px;
-            margin: 0px;
-            border: 1px solid #ccc;
-        }
     </style>
 </head>
+
 <body>
-    
-    <div id="chart"></div>
+    <!-- 水压图应用 -->
+    <div id="water-pressure-app" class="water-pressure-container">
+        <!-- 热源厂选择器 -->
+        <div class="water-pressure-filter">
+            选择热源厂：
+            <select>
+                <option value="1">北郊热源厂</option>
+                <option value="2">灞桥热源厂</option>
+            </select>
+            <select>
+                <option value="1">北郊换热站</option>
+                <option value="2">灞桥换热站</option>
+            </select>
+        </div>
+        <!-- 水压图图表 -->
+        <div class="water-pressure-chart"></div>
+        <!-- 时间选择器 -->
+        <div class="water-pressure-timefilter">
+            <div class="water-pressure-timefilter-datepicker">
+                <input class="datetimepicker" type="text" >
+            </div>
+            <div class="water-pressure-timefilter-timebar">
+                <div class="time-bar"></div>
+            </div>
+            <div class="water-pressure-timefilter-toolbar">
+                <button type="button"><</button>
+                <button type="button">></button>
+                <button type="button">最新</button>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="water-chart.js"></script>
 </body>
+
 </html>

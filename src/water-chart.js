@@ -1,4 +1,120 @@
+import EventEmitter from './EventEmitter';
+import './water.scss';
+
 (function () {
+
+    var $waterPressureApp = $('#water-pressure-app');
+
+    var DEFAULT_OPTIONS = {
+        TIME_TRIGGER: {
+            timeStep: 300,
+            longShort: '1,0'
+        }
+    };
+
+
+
+    var TimeTrigger = Object.assign(new EventEmitter(), {
+        init($app, options) {
+            this.$app = $app;
+            this.options = Object.assign(DEFAULT_OPTIONS.TIME_TRIGGER, options);
+            this.initDatePicker();
+            this.initTimePicker();
+            this.initToolbar();
+        },
+        /**
+         * 日期选择框
+         * 
+         */
+        initDatePicker() {
+            $('.datetimepicker', this.$app).datetimepicker({
+                yearOffset: 0,
+                lang: 'ch',
+                timepicker: false,
+                format: 'Y-m-d',
+                formatDate: 'Y-m-d',
+                minDate: this._formatDate(0), // yesterday is minimum date
+                maxDate: this._formatDate(Date.now()), // and tommorow is maximum date calendar
+                theme: 'dark'
+            });
+        },
+        /**
+         * 时间选择框
+         * 
+         */
+        initTimePicker() {
+            var options = this.options,
+                step = options.timeStep,
+                longShort = options.longShort.split(',').map(i => +i);
+            var $app = this.$app,
+                $container = $('.time-bar', $app),
+                $rule = $('<div class="time-bar-rule"></div>'),
+                $slider = $('<div></div>'),
+                $long = $('<div class="long-pointer"></div>'),
+                $short = $('<div class="short-pointer"></div>'),
+                $slider = $('<div class="time-bar-slider"></div>');
+            $container.append($rule);
+            $container.append($slider);
+            $rule.append($slider);
+
+            var count = Math.floor(86400 / step);
+            for (var i = 0; i <= count; i++) {
+                var $pointer;
+                if (i % 5 == 0) {
+                    $pointer = $long.clone();
+                    if (i % 10 == 0) {
+                        $pointer.attr('time', this._getTime(i * step));
+                    }
+                } else {
+                    $pointer = $short.clone();
+                }
+                $rule.append($pointer);
+            }
+            $rule.width((steps + 1) * 4);
+
+            $container.mCustomScrollbar({
+                axis: "x"
+            });
+        },
+        /**
+         * 按钮栏
+         * 
+         */
+        initToolbar() {
+
+        },
+        _formatDate(date) {
+            if (!isNaN(date)) {
+                date = new Date(date);
+            } else {
+                date = new Date();
+            }
+            return `${date.getFullYear()}-${this._toFull(date.getMonth()+1)}-${this._toFull(date.getDate())}`
+        },
+        _toFull(v) {
+            return (+v) < 10 ? `0${v}` : v;
+        },
+        _getTime(seconds) {
+            var hour = Math.floor(seconds / 3600),
+                mint = Math.floor(seconds % 3600 / 60);
+            if (hour < 10) {
+                hour = '0' + hour;
+            }
+            if (mint < 10) {
+                mint = '0' + mint;
+            }
+            return `${hour}:${mint}`;
+        }
+    });
+
+
+
+
+
+
+
+
+
     var symbolSize = 10;
 
 
@@ -259,6 +375,11 @@
     };
 
 
-    var chart = echarts.init(document.getElementById('chart'));
+    var chart = echarts.init($('#water-pressure-app .water-pressure-chart')[0]);
     chart.setOption(option);
+
+
+
+    TimeTrigger.init($waterPressureApp);
+
 })();

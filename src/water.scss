@@ -1,0 +1,120 @@
+$bgcolor :#171717;
+$textcolor :#9D9D9D;
+.water-pressure-container {
+    background: $bgcolor;
+    color: $textcolor;
+    padding: 10px; // 热源厂查询条件
+    .water-pressure-filter {
+        padding: 20px 0px;
+        select {
+            background: $bgcolor;
+            color: $textcolor;
+            padding: 2px 8px 5px 8px;
+            min-width: 150px;
+            border: 1px solid $textcolor;
+            outline: 0px;
+            option {
+                outline: 0px;
+            }
+        }
+    } // 图表
+    .water-pressure-chart {
+        width: 100%;
+        height: 500px;
+    } // 时间选择器
+    .water-pressure-timefilter {
+        position: relative;
+        overflow: hidden; // 日期框
+        .water-pressure-timefilter-datepicker {
+            float: left;
+            width: 200px;
+            height: 100px;
+            .datetimepicker {
+                background: $bgcolor;
+                color: $textcolor;
+                border: 1px solid $textcolor;
+                padding: 8px 8px;
+                margin-top: 15px;
+                outline: 0px;
+            }
+        } // 按钮框
+        .water-pressure-timefilter-toolbar {
+            float: right;
+            width: 150px;
+            text-align: center;
+            padding-top: 12px;
+            button {
+                background: $bgcolor;
+                color: $textcolor;
+                border: 1px solid $textcolor;
+                border-radius: 2px;
+                padding: 10px 15px;
+                cursor: pointer;
+                outline: 0px;
+                &:hover {
+                    background: darken($bgcolor, 15%);
+                }
+            }
+        } // 时间条
+        .water-pressure-timefilter-timebar {
+            position: absolute;
+            left: 200px;
+            right: 150px;
+            height: 100px;
+            .time-bar {
+                height: 55px;
+                background: $bgcolor;
+                overflow-x: auto;
+                overflow-y: visible;
+                .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+                    height: 12px;
+                }
+                .time-bar-rule {
+                    position: relative;
+                    height: 30px;
+                    display: inline-block;
+                    padding-left: 2px;
+                    padding-right: 5px;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                    border: 2px solid #9D9D9D;
+                    .long-pointer,
+                    .short-pointer {
+                        margin-left: 3px;
+                        width: 1px;
+                        display: inline-block;
+                        background: #9D9D9D;
+                        vertical-align: top;
+                    }
+                    .long-pointer {
+                        height: 10px;
+                        position: relative;
+                        &:before {
+                            content: attr(time);
+                            position: absolute;
+                            top: -15px;
+                            left: 0px;
+                            color: #FFF;
+                            font-size: 12px;
+                            transform: translate(-50%, 0) scale(0.6);
+                        }
+                    }
+                    .short-pointer {
+                        height: 5px;
+                    }
+                    .time-bar-slider {
+                        position: absolute;
+                        width: 16px;
+                        height: 16px;
+                        background: #ccc;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        &:hover {
+                            background: darken(#ccc, 10%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
