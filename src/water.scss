@@ -9,7 +9,7 @@ $textcolor :#9D9D9D;
         select {
             background: $bgcolor;
             color: $textcolor;
-            padding: 2px 8px 5px 8px;
+            padding: 5px 8px 5px 8px;
             min-width: 150px;
             border: 1px solid $textcolor;
             outline: 0px;
@@ -34,13 +34,13 @@ $textcolor :#9D9D9D;
                 color: $textcolor;
                 border: 1px solid $textcolor;
                 padding: 8px 8px;
-                margin-top: 15px;
+                margin-top: 10px;
                 outline: 0px;
             }
         } // 按钮框
         .water-pressure-timefilter-toolbar {
             float: right;
-            width: 150px;
+            width: 200px;
             text-align: center;
             padding-top: 12px;
             button {
@@ -52,14 +52,14 @@ $textcolor :#9D9D9D;
                 cursor: pointer;
                 outline: 0px;
                 &:hover {
-                    background: darken($bgcolor, 15%);
+                    background: #000;
                 }
             }
         } // 时间条
         .water-pressure-timefilter-timebar {
             position: absolute;
             left: 200px;
-            right: 150px;
+            right: 200px;
             height: 100px;
             .time-bar {
                 height: 55px;
@@ -73,43 +73,96 @@ $textcolor :#9D9D9D;
                     position: relative;
                     height: 30px;
                     display: inline-block;
-                    padding-left: 2px;
+                    padding-left: 5px;
                     padding-right: 5px;
-                    margin-top: 15px;
-                    margin-bottom: 10px;
+                    margin: 10px 15px;
                     border: 2px solid #9D9D9D;
                     .long-pointer,
                     .short-pointer {
-                        margin-left: 3px;
-                        width: 1px;
+                        position: relative;
+                        width: 7px;
+                        height: 100%;
                         display: inline-block;
-                        background: #9D9D9D;
                         vertical-align: top;
                     }
                     .long-pointer {
-                        height: 10px;
-                        position: relative;
                         &:before {
-                            content: attr(time);
+                            content: attr(timelabel);
+                            font-family: Arial, Helvetica, sans-serif;
                             position: absolute;
                             top: -15px;
-                            left: 0px;
+                            left: 3px;
                             color: #FFF;
                             font-size: 12px;
-                            transform: translate(-50%, 0) scale(0.6);
+                            transform: translate(-50%, 0) scale(0.8);
+                        }
+                        &:after {
+                            position: absolute;
+                            content: '';
+                            width: 1px;
+                            top: 0px;
+                            left: 3px;
+                            background: #9D9D9D;
+                            height: 10px;
                         }
                     }
                     .short-pointer {
-                        height: 5px;
+                        &:after {
+                            position: absolute;
+                            content: '';
+                            width: 1px;
+                            top: 0px;
+                            left: 3px;
+                            background: #9D9D9D;
+                            height: 5px;
+                        }
                     }
                     .time-bar-slider {
                         position: absolute;
-                        width: 16px;
+                        top: 7px;
+                        left: 1px;
+                        width: 15px;
                         height: 16px;
                         background: #ccc;
                         border-radius: 10px;
+                        z-index: 2;
                         cursor: pointer;
+                        text-align: center;
+                        color: #000;
+                        font-size: 14px;
+                        line-height: 16px;
+                        -webkit-touch-callout: none;
+                        /* iOS Safari */
+                        -webkit-user-select: none;
+                        /* Chrome/Safari/Opera */
+                        -khtml-user-select: none;
+                        /* Konqueror */
+                        -moz-user-select: none;
+                        /* Firefox */
+                        -ms-user-select: none;
+                        /* Internet Explorer/Edge */
+                        user-select: none;
                         &:hover {
+                            background: darken(#ccc, 10%);
+                        }
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            z-index: 1;
+                            left: 7px;
+                            top: -7px;
+                            width: 1px;
+                            height: 7px;
+                            background: darken(#ccc, 10%);
+                        }
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            z-index: 1;
+                            left: 7px;
+                            bottom: -7px;
+                            width: 1px;
+                            height: 7px;
                             background: darken(#ccc, 10%);
                         }
                     }

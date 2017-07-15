@@ -31,11 +31,11 @@
         <!-- 热源厂选择器 -->
         <div class="water-pressure-filter">
             选择热源厂：
-            <select>
+            <select class="select-ryc">
                 <option value="1">北郊热源厂</option>
                 <option value="2">灞桥热源厂</option>
             </select>
-            <select>
+            <select class="select-hrz">
                 <option value="1">北郊换热站</option>
                 <option value="2">灞桥换热站</option>
             </select>
@@ -45,15 +45,15 @@
         <!-- 时间选择器 -->
         <div class="water-pressure-timefilter">
             <div class="water-pressure-timefilter-datepicker">
-                <input class="datetimepicker" type="text" >
+                <input class="datetimepicker" type="text">
             </div>
             <div class="water-pressure-timefilter-timebar">
                 <div class="time-bar"></div>
             </div>
             <div class="water-pressure-timefilter-toolbar">
-                <button type="button"><</button>
-                <button type="button">></button>
-                <button type="button">最新</button>
+                <button class="time-prev" type="button"><</button>
+                <button class="time-next" type="button">></button>
+                <button class="time-current" type="button">最新</button>
             </div>
         </div>
     </div>
