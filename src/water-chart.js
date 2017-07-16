@@ -485,6 +485,16 @@ import './water.scss';
                         ],
                         itemStyle: style,
                         symbolSize: style.symbolSize || 10,
+                        label: {
+                            normal: {
+                                show: (name == 'high' || name == 'low' ? true : false),
+                                position: ['0%', name == 'high' ? '-200%' : '200%'],
+                                formatter: function () {
+                                    return (name == 'high' || name == 'low') ? getCustomConfig('pointLabel', false, item, name) : '';
+                                },
+                                textStyle: getCustomConfig('pointLabelStyle', false, item, name)
+                            }
+                        },
                         tooltip: {
                             formatter: function () {
                                 return getCustomConfig('pointTip', false, item, name);
@@ -608,41 +618,49 @@ import './water.scss';
 
     var symbolSize = 10;
     var items = [{
+        name: 'P0',
         high: 100,
         low: 14,
         standardHigh: 100,
         standardLow: 10
     }, {
+        name: 'P1',
         high: 90,
         low: 20,
         standardHigh: 94,
         standardLow: 16
     }, {
+        name: 'P2',
         high: 85,
         low: 24,
         standardHigh: 88,
         standardLow: 22
     }, {
+        name: 'P3',
         high: 74,
         low: 33,
         standardHigh: 82,
         standardLow: 28
     }, {
+        name: 'P4',
         high: 74,
         low: 35,
         standardHigh: 76,
         standardLow: 34
     }, {
+        name: 'P5',
         high: 71,
         low: 40,
         standardHigh: 70,
         standardLow: 40
     }, {
+        name: 'P6',
         high: 62,
         low: 44,
         standardHigh: 64,
         standardLow: 46
     }, {
+        name: 'P7',
         high: 58,
         low: 51,
         standardHigh: 58,
@@ -724,6 +742,20 @@ import './water.scss';
             textColor: '#000',
             maskColor: 'rgba(0, 0, 0, 0.8)',
             zlevel: 0
+        },
+        //点标签提示
+        pointLabel(data, type) {
+            return data.name;
+        },
+        //点标签样式
+        pointLabelStyle(data, type) {
+            return {
+                color: '#1488C4',
+                fontSize: 20,
+                fontStyle: 'normal',
+                fontWeight: 'normal',
+                fontFamily: 'Arial'
+            }
         },
         //点漂浮提示
         pointTip(data, type) {
