@@ -12,7 +12,8 @@ var entry = {   
     product: ['webpack/hot/only-dev-server', './src/product.js'],
     bundle: ['webpack/hot/only-dev-server', './src/main.js'],
     chart: ['webpack/hot/only-dev-server', './src/chart.js'],
-    'water-chart': ['webpack/hot/only-dev-server', './src/water-chart.js']
+    'water-chart': ['webpack/hot/only-dev-server', './src/water-chart.js'],
+    'water-chart-start': ['webpack/hot/only-dev-server', './src/water-chart-start.js']
 };
 
 var output = {
