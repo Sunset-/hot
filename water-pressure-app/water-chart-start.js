@@ -49,6 +49,294 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
+},{
+    name: 'P0',
+    high: 100,
+    low: 14,
+    standardHigh: 100,
+    standardLow: 10
+}, {
+    name: 'P1',
+    high: 90,
+    low: 20,
+    standardHigh: 94,
+    standardLow: 16
+}, {
+    name: 'P2',
+    high: 85,
+    low: 24,
+    standardHigh: 88,
+    standardLow: 22
+}, {
+    name: 'P3',
+    high: 74,
+    low: 33,
+    standardHigh: 82,
+    standardLow: 28
+}, {
+    name: 'P4',
+    high: 74,
+    low: 35,
+    standardHigh: 76,
+    standardLow: 34
+}, {
+    name: 'P5',
+    high: 71,
+    low: 40,
+    standardHigh: 70,
+    standardLow: 40
+}, {
+    name: 'P6',
+    high: 62,
+    low: 44,
+    standardHigh: 64,
+    standardLow: 46
+}, {
+    name: 'P7',
+    high: 58,
+    low: 51,
+    standardHigh: 58,
+    standardLow: 52
 }];
 
 function getColor(v) {
@@ -67,6 +355,7 @@ var labels = {
 //初始化
 WaterPressureApp.init('#water-pressure-app', {
     timeStep: 360,
+    windowPointCount : 10,
     //获取热源厂
     loadRyc: function loadRyc() {
         return Promise.resolve([{
