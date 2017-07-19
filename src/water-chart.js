@@ -107,9 +107,9 @@
             $datetimepicker.on('change', (ev) => {
                 this.emit('change-date', ev.target.value);
             });
-            this.on('set-date', (date) => {
+            this.on('set-date', (date, slient) => {
                 $datetimepicker.val(date);
-                this.emit('change-date', date);
+                this.emit('change-date', date, slient);
             });
         },
         /**
@@ -208,10 +208,24 @@
                 $prev = $('.time-prev', this.$app),
                 $next = $('.time-next', this.$app);
             $prev.on('click', () => {
-                this.setTime(this.state.currentTime - this.options.timeStep * 1000);
+                var time = this.state.currentTime - this.options.timeStep * 1000;
+                if (time < 0) {
+                    time = 86400000 + time;
+                    var d = new Date(this.state.currentDate);
+                    d.setDate(d.getDate() - 1);
+                    this.setDate(d, true);
+                }
+                this.setTime(time);
             });
             $next.on('click', () => {
-                this.setTime(this.state.currentTime + this.options.timeStep * 1000);
+                var time = this.state.currentTime + this.options.timeStep * 1000;
+                if (time >= 86400000) {
+                    time = time - 86400000;
+                    var d = new Date(this.state.currentDate);
+                    d.setDate(d.getDate() + 1);
+                    this.setDate(d, true);
+                }
+                this.setTime(time);
             });
             $current.on('click', () => {
                 this.setNow();
@@ -224,7 +238,7 @@
             var self = this;
 
             function refresh() {
-                if (self.state.currentDate && self.state.currentTime) {
+                if (self.state.currentDate !== null && self.state.currentTime !== null) {
                     if (new Date(self.state.currentDate).getTime() + self.state.currentTime - 8 * 3600 * 1000 > Date.now()) {
                         self.setNow();
                     } else {
@@ -246,9 +260,9 @@
                 this.state.currentTime = time;
                 refresh();
             });
-            this.on('change-date', (date) => {
+            this.on('change-date', (date, slient) => {
                 this.state.currentDate = date;
-                refresh();
+                slient || refresh();
             });
         },
         /**
@@ -259,19 +273,19 @@
         },
         setNow() {
             var now = new Date();
+            this.setDate(now, true);
             this.setTime((now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) * 1000);
-            this.setDate(now);
         },
         /**
          * 设置日期
          * @param  time 
          */
-        setDate(time) {
+        setDate(time, slient) {
             var date = time;
             if (!isNaN(time)) {
                 date = new Date(time);
             }
-            this.emit('set-date', this._formatDate(date));
+            this.emit('set-date', this._formatDate(date), slient);
         },
         /**
          * 设置时间
@@ -400,18 +414,8 @@
                         filterMode: 'empty'
                     },
                     {
-                        type: 'slider',
-                        yAxisIndex: 0,
-                        filterMode: 'empty'
-                    },
-                    {
                         type: 'inside',
                         xAxisIndex: 0,
-                        filterMode: 'empty'
-                    },
-                    {
-                        type: 'inside',
-                        yAxisIndex: 0,
                         filterMode: 'empty'
                     }
                 ],
@@ -452,6 +456,7 @@
                     //坐标轴
                     chartOptions.xAxis.max = chartData.xAxisMax;
                     chartOptions.yAxis.max = chartData.yAxisMax;
+                    chartOptions.dataZoom[0].end = (getCustomConfig('windowPointCount', false) || 10) / chartData.xAxisMax * 100;
                     //点
                     series = series.concat(chartData.points);
                     //线

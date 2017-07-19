@@ -49,7 +49,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -97,7 +97,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -145,7 +145,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -193,7 +193,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -241,7 +241,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -289,7 +289,7 @@ var items = [{
     low: 51,
     standardHigh: 58,
     standardLow: 52
-},{
+}, {
     name: 'P0',
     high: 100,
     low: 14,
@@ -355,7 +355,7 @@ var labels = {
 //初始化
 WaterPressureApp.init('#water-pressure-app', {
     timeStep: 360,
-    windowPointCount : 10,
+    windowPointCount: 10,
     //获取热源厂
     loadRyc: function loadRyc() {
         return Promise.resolve([{
@@ -375,25 +375,29 @@ WaterPressureApp.init('#water-pressure-app', {
         return Promise.resolve([{
             text: '请选择',
             value: ''
-        }].concat([[{
-            text: '第一换热站A',
-            value: 1
-        }, {
-            text: '第一换热站B',
-            value: 2
-        }], [{
-            text: '第二换热站A',
-            value: 3
-        }, {
-            text: '第二换热站B',
-            value: 4
-        }], [{
-            text: '第三换热站A',
-            value: 5
-        }, {
-            text: '第三换热站B',
-            value: 6
-        }]][ryc.value]));
+        }].concat([
+            [{
+                text: '第一换热站A',
+                value: 1
+            }, {
+                text: '第一换热站B',
+                value: 2
+            }],
+            [{
+                text: '第二换热站A',
+                value: 3
+            }, {
+                text: '第二换热站B',
+                value: 4
+            }],
+            [{
+                text: '第三换热站A',
+                value: 5
+            }, {
+                text: '第三换热站B',
+                value: 6
+            }]
+        ][ryc.value]));
     },
 
     //获取水压数据
